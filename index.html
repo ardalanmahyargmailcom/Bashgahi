@@ -1,48 +1,88 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جدول امتیازات فوتبال</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>جدول مسابقات فوتبال</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>جدول امتیازات فوتبال</h1>
-        <table id="scoreTable">
-            <thead>
-                <tr>
-                    <th>تیم</th>
-                    <th>گل زده</th>
-                    <th>امتیاز</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>نوید</td>
-                    <td><input type="number" value="0" onchange="updateTable()"></td>
-                    <td><input type="number" value="0" onchange="updateTable()"></td>
-                </tr>
-                <tr>
-                    <td>رامیار</td>
-                    <td><input type="number" value="0" onchange="updateTable()"></td>
-                    <td><input type="number" value="0" onchange="updateTable()"></td>
-                </tr>
-                <tr>
-                    <td>نوید</td>
-                    <td><input type="number" value="0" onchange="updateTable()"></td>
-                    <td><input type="number" value="0" onchange="updateTable()"></td>
-                </tr>
-                <tr>
-                    <td>مهیار</td>
-                    <td><input type="number" value="0" onchange="updateTable()"></td>
-                    <td><input type="number" value="0" onchange="updateTable()"></td>
-                </tr>
-            </tbody>
-        </table>
-        <button onclick="saveData()">ذخیره</button>
-        <button onclick="loadData()">بارگذاری</button>
-    </div>
+    <h1>جدول مسابقات فوتبال</h1>
+    <table id="matches">
+        <thead>
+            <tr>
+                <th>تیم اول</th>
+                <th>تیم دوم</th>
+                <th>نتیجه</th>
+                <th>برد</th>
+                <th>باخت</th>
+                <th>گل زده</th>
+                <th>گل خورده</th>
+                <th>امتیاز</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>رامیار</td>
+                <td>نوید</td>
+                <td><input type="text" data-team1="رامیار" data-team2="نوید" class="result"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>رامیار</td>
+                <td>مهیار</td>
+                <td><input type="text" data-team1="رامیار" data-team2="مهیار" class="result"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>رامیار</td>
+                <td>فرشید</td>
+                <td><input type="text" data-team1="رامیار" data-team2="فرشید" class="result"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>نوید</td>
+                <td>مهیار</td>
+                <td><input type="text" data-team1="نوید" data-team2="مهیار" class="result"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>نوید</td>
+                <td>فرشید</td>
+                <td><input type="text" data-team1="نوید" data-team2="فرشید" class="result"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>مهیار</td>
+                <td>فرشید</td>
+                <td><input type="text" data-team1="مهیار" data-team2="فرشید" class="result"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="save">ذخیره</button>
     <script src="script.js"></script>
 </body>
 </html>
