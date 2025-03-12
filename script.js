@@ -36,7 +36,7 @@ function calculateResults(input) {
     const team1Goals = parseInt(result[0]) || 0;
     const team2Goals = parseInt(result[1]) || 0;
     const team1Name = input.dataset.team1;
-        const team2Name = input.dataset.team2;
+    const team2Name = input.dataset.team2;
 
     if (team1Goals > team2Goals) {
         winsCell.textContent = 1;
@@ -103,4 +103,3 @@ saveButton.addEventListener('click', () => {
     localStorage.setItem('matchData', JSON.stringify(savedData));
     message.style.display = 'block';
 });
-
