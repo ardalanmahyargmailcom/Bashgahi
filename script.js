@@ -27,8 +27,10 @@ function calculateResults(input) {
     const row = input.parentElement.parentElement;
     const winsCell = row.querySelector('.wins');
     const lossesCell = row.querySelector('.losses');
-    const goalsScoredCell = row.querySelector('.goals-scored');
-    const goalsConcededCell = row.querySelector('.goals-conceded');
+    const goalsScoredTeam1Cell = row.querySelector('.goals-scored-team1');
+    const goalsScoredTeam2Cell = row.querySelector('.goals-scored-team2');
+    const goalsConcededTeam1Cell = row.querySelector('.goals-conceded-team1');
+    const goalsConcededTeam2Cell = row.querySelector('.goals-conceded-team2');
     const pointsCell = row.querySelector('.points');
     const result = input.value.split('-');
     const team1Goals = parseInt(result[0]) || 0; // مقدار پیش فرض 0 در صورت عدم وجود عدد
@@ -50,8 +52,10 @@ function calculateResults(input) {
         pointsCell.textContent = 1;
     }
 
-    goalsScoredCell.textContent = team1Goals;
-    goalsConcededCell.textContent = team2Goals;
+    goalsScoredTeam1Cell.textContent = team1Goals;
+    goalsScoredTeam2Cell.textContent = team2Goals;
+    goalsConcededTeam1Cell.textContent = team2Goals;
+    goalsConcededTeam2Cell.textContent = team1Goals;
 
     // بروزرسانی داده‌های ذخیره شده
     const key = `${team1Name}-${team2Name}`;
