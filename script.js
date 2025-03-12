@@ -31,7 +31,8 @@ function calculateResults(input) {
     const goalsScoredTeam2Cell = row.querySelector('.goals-scored-team2');
     const goalsConcededTeam1Cell = row.querySelector('.goals-conceded-team1');
     const goalsConcededTeam2Cell = row.querySelector('.goals-conceded-team2');
-    const pointsCell = row.querySelector('.points');
+    const pointsTeam1Cell = row.querySelector('.points-team1');
+    const pointsTeam2Cell = row.querySelector('.points-team2');
     const result = input.value.split('-');
     const team1Goals = parseInt(result[0]) || 0; // مقدار پیش فرض 0 در صورت عدم وجود عدد
     const team2Goals = parseInt(result[1]) || 0; // مقدار پیش فرض 0 در صورت عدم وجود عدد
@@ -41,15 +42,18 @@ function calculateResults(input) {
     if (team1Goals > team2Goals) {
         winsCell.textContent = 1;
         lossesCell.textContent = 0;
-        pointsCell.textContent = 3;
+        pointsTeam1Cell.textContent = 3;
+        pointsTeam2Cell.textContent = 0;
     } else if (team1Goals < team2Goals) {
         winsCell.textContent = 0;
         lossesCell.textContent = 1;
-        pointsCell.textContent = 0;
+        pointsTeam1Cell.textContent = 0;
+        pointsTeam2Cell.textContent = 3;
     } else {
         winsCell.textContent = 0;
         lossesCell.textContent = 0;
-        pointsCell.textContent = 1;
+        pointsTeam1Cell.textContent = 1;
+        pointsTeam2Cell.textContent = 1;
     }
 
     goalsScoredTeam1Cell.textContent = team1Goals;
@@ -64,6 +68,4 @@ function calculateResults(input) {
 
 // ذخیره داده‌ها در LocalStorage
 saveButton.addEventListener('click', () => {
-    localStorage.setItem('matchData', JSON.stringify(savedData));
-    message.style.display = 'block';
-});
+    localStorage.setItem('matchData
