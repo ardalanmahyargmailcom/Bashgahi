@@ -31,8 +31,8 @@ function calculateResults(input) {
     const goalsConcededCell = row.querySelector('.goals-conceded');
     const pointsCell = row.querySelector('.points');
     const result = input.value.split('-');
-    const team1Goals = parseInt(result[0]);
-    const team2Goals = parseInt(result[1]);
+    const team1Goals = parseInt(result[0]) || 0; // مقدار پیش فرض 0 در صورت عدم وجود عدد
+    const team2Goals = parseInt(result[1]) || 0; // مقدار پیش فرض 0 در صورت عدم وجود عدد
     const team1Name = input.dataset.team1;
     const team2Name = input.dataset.team2;
 
