@@ -1,70 +1,59 @@
-document.addEventListener('DOMContentLoaded', loadData);
+const results = document.querySelectorAll('.result');
+const saveButton = document.getElementById('save');
 
-function updateTable() {
-    const rows = document.querySelectorAll('#scoreTable tbody tr');
-    const teams = [];
+// بارگیری داده‌ها از LocalStorage
+const savedData = JSON.parse(localStorage.getItem('matchData')) || {};
 
-    rows.forEach(row => {
-        const teamName = row.cells[0].innerText;
-        const goals = parseInt(row.cells[1].querySelector('input').value) || 0;
-        const points = parseInt(row.cells[2].querySelector('input').value) || 0;
+// پر کردن نتایج ذخیره شده
+results.forEach(input => {
+    const team1 = input.dataset.team1;
+    const team2 = input.dataset.team2;
+    const key = `${team1}-${team2}`;
+    if (savedData[key]) {
+        input.value = savedData[key];
+        calculateResults(input);
+    }
+});
 
-        teams.push({ name: teamName, goals, points });
+// محاسبه نتایج
+results.forEach(input => {
+    input.addEventListener('change', () => {
+        calculateResults(input);
     });
+});
 
-    // Sort teams by points and goals
-    teams.sort((a, b) => {
-        if (b.points === a.points) {
-            return b.goals - a.goals; // Sort by goals if points are equal
-        }
-        return b.points - a.points; // Sort by points
-    });
+function calculateResults(input) {
+    const row = input.parentElement.parentElement;
+    const cells = row.querySelectorAll('td');
+    const result = input.value.split('-');
+    const team1Goals = parseInt(result[0]);
+    const team2Goals = parseInt(result[1]);
+    const team1Name = input.dataset.team1;
+    const team2Name = input.dataset.team2;
 
-    // Update the table
-    const tbody = document.querySelector('#scoreTable tbody');
-    tbody.innerHTML = ''; // Clear existing rows
+    if (team1Goals > team2Goals) {
+        cells[3].textContent = 1; // برد
+        cells[4].textContent = 0; // باخت
+        cells[7].textContent = 3; // امتیاز
+    } else if (team1Goals < team2Goals) {
+        cells[3].textContent = 0;
+        cells[4].textContent = 1;
+        cells[7].textContent = 0;
+    } else {
+        cells[3].textContent = 0;
+        cells[4].textContent = 0;
+        cells[7].textContent = 1;
+    }
 
-    teams.forEach(team => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${team.name}</td>
-            <td><input type="number" value="${team.goals}" onchange="updateTable()"></td>
-            <td><input type="number" value="${team.points}" onchange="updateTable()"></td>
-        `;
-        tbody.appendChild(row);
-    });
+    cells[5].textContent = team1Goals; // گل زده
+    cells[6].textContent = team2Goals; // گل خورده
+
+    // بروزرسانی داده‌های ذخیره شده
+    const key = `${team1Name}-${team2Name}`;
+    savedData[key] = input.value;
 }
 
-function saveData() {
-    const rows = document.querySelectorAll('#scoreTable tbody tr');
-    const teams = [];
-
-    rows.forEach(row => {
-        const teamName = row.cells[0].innerText;
-        const goals = parseInt(row.cells[1].querySelector('input').value) || 0;
-        const points = parseInt(row.cells[2].querySelector('input').value) || 0;
-
-        teams.push({ name: teamName, goals, points });
-    });
-
-    localStorage.setItem('teams', JSON.stringify(teams));
-    alert('داده‌ها با موفقیت ذخیره شد!'); // پیام تأیید
-}
-
-function loadData() {
-    const teams = JSON.parse(localStorage.getItem('teams')) || [];
-    const tbody = document.querySelector('#scoreTable tbody');
-    tbody.innerHTML = ''; // Clear existing rows
-
-    teams.forEach(team => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${team.name}</td>
-            <td><input type="number" value="${team.goals}" onchange="updateTable()"></td>
-            <td><input type="number" value="${team.points}" onchange="updateTable()"></td>
-        `;
-        tbody.appendChild(row);
-    });
-
-    updateTable(); // Update the table to sort teams
-}
+// ذخیره داده‌ها در LocalStorage
+saveButton.addEventListener('click', () => {
+    localStorage.setItem('matchData', JSON.stringify(savedData));
+});
