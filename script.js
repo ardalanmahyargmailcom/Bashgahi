@@ -48,7 +48,7 @@ function saveData() {
     });
 
     localStorage.setItem('teams', JSON.stringify(teams));
-    alert('داده‌ها با موفقیت ذخیره شد!');
+    alert('داده‌ها با موفقیت ذخیره شد!'); // پیام تأیید
 }
 
 function loadData() {
